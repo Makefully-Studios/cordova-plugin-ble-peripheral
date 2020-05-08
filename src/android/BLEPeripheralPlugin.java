@@ -547,7 +547,7 @@ public class BLEPeripheralPlugin extends CordovaPlugin {
         builder.setIncludeTxPowerLevel(false); // reserve advertising space for URI
 
         builder.addServiceUuid(new ParcelUuid(serviceUuid)); // TODO accept multiple services in the future
-        builder.setIncludeDeviceName(true);
+        builder.setIncludeDeviceName(false);
         return builder.build();
     }
 
