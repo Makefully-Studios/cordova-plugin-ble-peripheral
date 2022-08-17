@@ -185,11 +185,13 @@ module.exports = {
     setCharacteristicValue: function(service, characteristic, value) {
 
         return new Promise(function(resolve, reject) {
-            if (value.constructor !== ArrayBuffer) {
-                // TODO try calling value.buffer before rejecting
+            const
+                buffer = ArrayBuffer.isView(value) ? value.buffer : value;
+
+            if (buffer.constructor.name !== 'ArrayBuffer') {
                 reject('value must be an ArrayBuffer');
             }
-            cordova.exec(resolve, reject, 'BLEPeripheral', 'setCharacteristicValue', [service, characteristic, value]);
+            cordova.exec(resolve, reject, 'BLEPeripheral', 'setCharacteristicValue', [service, characteristic, buffer]);
         });
 
     },
